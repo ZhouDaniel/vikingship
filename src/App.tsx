@@ -6,10 +6,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Menu defaultIndex={1} onSelect={(index)=>{alert(index)}}>
+        <Menu defaultIndex={1} onSelect={(index)=>{alert(index)}} mode='vertical'>
           <MenuItem index={0}>cool Link</MenuItem>
           <MenuItem index={1}>cool Link2</MenuItem>
-          <MenuItem index={2}>cool Link3</MenuItem>
+          <MenuItem index={2} disabled>cool Link3</MenuItem>
+          {/* <li>qqqq</li> */}
         </Menu>
 
         <Button disabled> disable </Button>

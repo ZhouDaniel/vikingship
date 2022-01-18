@@ -25,7 +25,9 @@ type AnchorButtonProps = IBaseButtonProps & AnchorHTMLAttributes<HTMLElement>
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 const Button: React.FC<ButtonProps> = (props) => {
     // eslint-disable-next-line
+    console.log('props',props);
     const {className,disabled,size,btnType,children,href,...restProps} = props
+    console.log({...restProps})
     // btn btn-lg btn--primary
     const classes = classNames('btn',className, {
         'disabled': btnType === ButtonType.Link && disabled,

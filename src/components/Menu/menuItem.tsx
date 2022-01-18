@@ -23,4 +23,5 @@ const MenuItem: React.FC<IMenuItemProps> = (props) => {
     return <li style={style} className={classes} onClick={handleClick}>{children}</li>
 
 }
+MenuItem.displayName = 'menu-item'
 export default MenuItem

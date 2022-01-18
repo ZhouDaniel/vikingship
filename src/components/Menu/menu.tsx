@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 import classNames from "classnames";
-
+import {IMenuItemProps} from './menuItem'
 type MenuMode = "horizontal" | "vertical";
 
 export interface IMenuProps {
@@ -20,7 +20,7 @@ const Menu: React.FC<IMenuProps> = (props) => {
   const [currentIndex, setCurrentIndex] = useState(defaultIndex);
   const classes = classNames("viking-menu", className, {
     "menu-vertical": mode === "vertical",
-    "menu-horizontal": mode === "horizontal",
+    // "menu-horizontal": mode === "horizontal",
   });
   const handleClick = (index: number) => {
     setCurrentIndex(index);
@@ -32,9 +32,21 @@ const Menu: React.FC<IMenuProps> = (props) => {
     index: currentIndex ? currentIndex: 0,
     onSelect: handleClick,
   };
+  const renderChildren = () => {
+    return React.Children.map(children,(child,index) => {
+        const childElement = child as React.FunctionComponentElement<IMenuItemProps>
+        // const childElement = child as React.ReactElement<IMenuItemProps>
+        const {displayName} = childElement.type;
+        if(displayName === 'menu-item') {
+            return child
+        } else {
+            console.error('Warning:Menu has a child which is not a MenuItem compontent')
+        }
+    })
+  }
   return (
-    <ul className={classes} style={style}>
-      <menuContext.Provider value={contentValue}>{children}</menuContext.Provider>
+    <ul className={classes} style={style} data-testid="test-menu">
+      <menuContext.Provider value={contentValue}>{renderChildren()}</menuContext.Provider>
     </ul>
   );
 };
